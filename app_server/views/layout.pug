@@ -1,0 +1,37 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    title= title
+    link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    //- Navbar
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+      .container-fluid
+        a.navbar-brand(href='/') WPM Scheduler
+        button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarNav')
+          span.navbar-toggler-icon
+        #navbarNav.collapse.navbar-collapse
+          ul.navbar-nav.me-auto.mb-2.mb-lg-0
+            li.nav-item
+              a.nav-link(href='/') Home
+            li.nav-item
+              a.nav-link(href='/about') About
+            li.nav-item
+              a.nav-link(href='/contact') Contact
+          ul.navbar-nav.ms-auto.mb-2.mb-lg-0
+            if !currentUser
+              li.nav-item
+                a.nav-link(href='/signin') Sign In
+              li.nav-item
+                a.nav-link(href='/register') Register
+            else
+              li.nav-item.nav-link.text-light Hello #{currentUser.name}
+              li.nav-item
+                form(method='post', action='/signout')
+                  button.btn.btn-sm.btn-outline-light(type='submit') Sign Out
+    .container.mt-4
+      block content
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js')

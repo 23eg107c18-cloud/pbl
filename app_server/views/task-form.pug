@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  form(method='post', action=action)
+    .mb-3
+      label.form-label(for='title') Title
+      input.form-control(type='text', name='title', id='title', required, value=task ? task.title : '')
+    .mb-3
+      label.form-label(for='description') Description
+      textarea.form-control(name='description')= task ? task.description : ''
+    .mb-3
+      label.form-label(for='nextRun') Next Run (datetime-local)
+      input.form-control(type='datetime-local', name='nextRun', value=task && task.nextRun ? new Date(task.nextRun).toISOString().slice(0,16) : '')
+    .mb-3
+      label.form-label(for='interval') Interval (cron-like or human, e.g. 'daily' / '3600s')
+      input.form-control(type='text', name='interval', value=task ? task.interval : '')
+    button.btn.btn-primary(type='submit') Save
