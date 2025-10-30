@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  h1 Task Scheduler
+  a.btn.btn-success.mb-3(href='/task/add') Add Task
+  if tasks && tasks.length
+    table.table.table-striped
+      thead
+        tr
+          th Title
+          th Next Run
+          th Interval
+          th Actions
+      tbody
+        each t in tasks
+          tr
+            td #{t.title}
+            td #{t.nextRun ? new Date(t.nextRun).toLocaleString() : '—'}
+            td #{t.interval || '—'}
+            td
+              a.btn.btn-primary.btn-sm.me-1(href=`/task/${t._id}`) View
+              a.btn.btn-outline-secondary.btn-sm.me-1(href=`/task/${t._id}/edit`) Edit
+              form.d-inline(method='post', action=`/task/${t._id}/delete`)
+                button.btn.btn-danger.btn-sm(type='submit') Delete
+  else
+    p.text-muted No tasks yet.

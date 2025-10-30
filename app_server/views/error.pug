@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  .alert.alert-danger
+    h4 An error occurred
+    if message
+      p= message
+    if error && error.stack
+      pre= error.stack

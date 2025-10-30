@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= task.title
+  p
+    strong Description: 
+    | #{task.description}
+  p
+    strong Next Run: 
+    | #{task.nextRun ? new Date(task.nextRun).toLocaleString() : '—'}
+  p
+    strong Interval: 
+    | #{task.interval || '—'}
+  a.btn.btn-secondary(href='/') Back
